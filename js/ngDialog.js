@@ -5,8 +5,15 @@
  */
 
 (function (root, factory) {
-    // Global Variables
-    factory(root.angular);
+    if (typeof exports === 'object' && typeof module === 'object') {
+        module.exports = factory(require('angular'));
+    } else if(typeof define === 'function' && define.amd) {
+        define(['angular'], factory);
+    } else if(typeof exports === 'object') {
+        exports['ngDialog'] = factory(require('angular'));
+    } else {
+        root['ngDialog'] = factory(root['angular']);
+    }
 }(this, function (angular) {
     'use strict';
 
